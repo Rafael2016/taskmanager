@@ -1,4 +1,4 @@
-package br.com.rafaeluz.taskmanager.user;
+package br.com.rafaeluz.taskmanager.task;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,19 +12,24 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
-@Entity(name = "tbl_users")
-public class UserModel {
+@Entity(name = "tbl_task")
+public class TaskModel {
 
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
-
-    @Column(unique = true)
-    private String userName;
-    private String name;
-    private String password;
+    private String description;
+    @Column(length = 50)
+    private String title;
+    private LocalDateTime startAt;
+    private LocalDateTime endAt;
+    private String priority;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    /**
+     * @Relacion
+     */
+    private UUID userId;
 }
